@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.cours_openclassroom.pierre.projet_android.MainActivity">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="368dp"
+    android:layout_height="495dp"
+    tools:layout_editor_absoluteY="8dp"
+    tools:layout_editor_absoluteX="8dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_weight="9"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent" />
+
+    <Button
+        android:id="@+id/btnCamera"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_red_dark"
+        android:textColor="@android:color/white"
+        android:text="Open camera"/>
+
+
+    <TextView
+        android:id="@+id/tvHasCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#FF0000"
+        android:textColor="#FFF"
+        android:textSize="18dp"
+        android:layout_marginBottom="5dp"
+        android:text="Has Camera?" />
+
+    <TextView
+
+    android:id="@+id/tvHasCameraApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#FF0000"
+        android:textColor="#FFF"
+        android:textSize="18dp"
+        android:text="Has CameraApp?" />
+
+        <ImageView
+            android:id="@+id/ivThumbnailPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_menu_gallery" />
+
+     
+        <Button
+            android:id="@+id/btnTakePic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Take a picture" />
+
+
+</LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
