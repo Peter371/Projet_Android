@@ -33,7 +33,7 @@ import android.view.View.OnClickListener;
  * Created by Pierre on 25/05/2017.
  */
 
-public class choix_photo_partager extends Activity implements OnClickListener {
+public class choix_photo_partager extends Activity{
 
     Button btnTackPic;
     TextView tvHasCamera, tvHasCameraApp;
@@ -59,47 +59,40 @@ public class choix_photo_partager extends Activity implements OnClickListener {
             tvHasCamera.setText("You have Camera");
         }
         // Do you have Camera Apps?
-        if (hasDefualtCameraApp(MediaStore.ACTION_IMAGE_CAPTURE)) {
+        if (hasDefaultCameraApp(MediaStore.ACTION_IMAGE_CAPTURE)) {
             tvHasCameraApp.setBackgroundColor(0xFF00CC00);
             tvHasCameraApp.setText("You have Camera Apps");
         }
         // add onclick listener to the button
-        btnTackPic.setOnClickListener(this);
+        btnTackPic.setOnClickListener(new OnClickListener() {
+            // on button "btnTackPic" is clicked
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(getAppContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    askForPermission();
+                } else {
+                    // create intent with ACTION_IMAGE_CAPTURE action
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, TAKE_PICTURE);
+                }
+            }
+        });
     }
 
     public static Context getAppContext() {
         return choix_photo_partager.context;
     }
 
-
-    // on button "btnTackPic" is clicked
-    @Override
-    public void onClick(View view) {
-
-        if (ActivityCompat.checkSelfPermission(getAppContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            askForPermission();
-        } else {
-            // create intent with ACTION_IMAGE_CAPTURE action
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, TAKE_PICTURE);
-        }
-    }
-
-
-    private void askForPermission()
-    {
+    private void askForPermission() {
         requestPermissions(new String[] { Manifest.permission.CAMERA }, 2);
         requestPermissions(new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, 2);
         requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 2);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
-    {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -122,7 +115,7 @@ public class choix_photo_partager extends Activity implements OnClickListener {
     }
 
     // method to check you have Camera Apps
-    private boolean hasDefualtCameraApp(String action) {
+    private boolean hasDefaultCameraApp(String action) {
         final PackageManager packageManager = getPackageManager();
         final Intent intent = new Intent(action);
         List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);

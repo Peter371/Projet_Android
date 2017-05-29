@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "883502934936",
+    "firebase_url": "https://instapierrethomas.firebaseio.com",
+    "project_id": "instapierrethomas",
+    "storage_bucket": "instapierrethomas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883502934936:android:573ac584310dbaa2",
+        "android_client_info": {
+          "package_name": "com.cours_openclassroom.pierre.projet_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883502934936-ai6epf49s5iju0m3j6mg5blj1pbj0evu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cours_openclassroom.pierre.projet_android",
+            "certificate_hash": "907ed242d34929a7fe779860170b0aa3c6ad2f60"
+          }
+        },
+        {
+          "client_id": "883502934936-t0pvnqmgq68pq388kv0rkcs35kf2ee4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1BnBlOdisDYfmlO0B9ZL0eFHDc0npE20"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883502934936-t0pvnqmgq68pq388kv0rkcs35kf2ee4i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
