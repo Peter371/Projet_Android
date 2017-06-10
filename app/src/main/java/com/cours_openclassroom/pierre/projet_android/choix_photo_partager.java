@@ -41,6 +41,7 @@ public class choix_photo_partager extends Activity{
     Bitmap bitMap;
     static int TAKE_PICTURE = 1;
     private static Context context;
+    private Button retour;
 
 
     @Override
@@ -85,6 +86,22 @@ public class choix_photo_partager extends Activity{
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
+            }
+        });
+
+        retour = (Button) findViewById(R.id.retour);
+        retour.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Le premier paramètre est le nom de l'activité actuelle
+                // Le second est le nom de l'activité de destination
+                Intent secondeActivite = new Intent(choix_photo_partager.this, MainActivity.class);
+
+                // Puis on lance l'intent !
+                startActivity(secondeActivite);
+                //Log.d("test", "------------------------------------------------------------------------------------------------------------------------------ ");
+
             }
         });
     }
