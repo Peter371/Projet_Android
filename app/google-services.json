@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "883502934936-hakce21k1lnkp4usf76buo5ea3d6atpp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cours_openclassroom.pierre.projet_android",
+            "certificate_hash": "f2385f059ad1cbd90298bd84543fb82f0a25a8c9"
+          }
+        },
+        {
           "client_id": "883502934936-ai6epf49s5iju0m3j6mg5blj1pbj0evu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
