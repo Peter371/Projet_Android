@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Take a picture" />
-    
+
         <Button
             android:id="@+id/retour"
             android:layout_width="wrap_content"
