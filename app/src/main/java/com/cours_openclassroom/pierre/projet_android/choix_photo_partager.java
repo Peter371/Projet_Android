@@ -55,13 +55,23 @@ public class choix_photo_partager extends Activity{
         ivThumbnailPhoto = (ImageView) findViewById(R.id.ivThumbnailPhoto);
         // Does your device have a camera?
         if (hasCamera()) {
-            tvHasCamera.setBackgroundColor(0xFF00CC00);
-            tvHasCamera.setText("You have Camera");
+            tvHasCamera.setBackgroundColor(000);
+            tvHasCamera.setText("");
         }
+        else {
+            tvHasCamera.setBackgroundColor(0xFF00CC00);
+            tvHasCamera.setText("Vous n'avez pas d'appareil photo sur votre téléphone");
+        }
+
+
         // Do you have Camera Apps?
         if (hasDefaultCameraApp(MediaStore.ACTION_IMAGE_CAPTURE)) {
+            tvHasCameraApp.setBackgroundColor(000);
+            tvHasCameraApp.setText("");
+        }
+        else{
             tvHasCameraApp.setBackgroundColor(0xFF00CC00);
-            tvHasCameraApp.setText("You have Camera Apps");
+            tvHasCameraApp.setText("Vous n'avez pas d'application appareil photo sur votre téléphone");
         }
         // add onclick listener to the button
         btnTackPic.setOnClickListener(new OnClickListener() {
