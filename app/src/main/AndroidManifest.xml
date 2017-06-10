@@ -40,6 +40,16 @@
 
             </intent-filter>
         </activity>
+        <activity
+            android:name=".layout_informations_photo"
+            android:label="informations photo"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+            </intent-filter>
+        </activity>
 
         <!-- Defining Services -->
 
