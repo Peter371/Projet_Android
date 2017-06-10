@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
 
                 TextView mListePhoto = (TextView) findViewById(R.id.Liste_des_photos);
 
-                StorageReference filepath = mStorage.child("Photos").child(nomDeLaPhoto);
+                StorageReference filepath = mStorage.child("Photos");
                 mListePhoto.setText(filepath.toString());
                 Log.e("WUUUUUUUUUUUUUUUUUUUUUU", filepath.toString());
 
