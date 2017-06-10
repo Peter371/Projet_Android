@@ -24,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class MainActivity extends Activity {
@@ -123,7 +124,12 @@ public class MainActivity extends Activity {
 
                 Log.e("YOYOYOYO", uri.toString());
                 Bitmap image = (Bitmap) data.getExtras().get("data");
+
                 mImageView.setImageBitmap(image);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+
                 TextView mListePhoto = (TextView) findViewById(R.id.Liste_des_photos);
 
 //              CONSTAT: "data" à l'origine du problème. Type abstract mais lors de l'appel de onActivityResult pb sur getData -> null pointer exception relevée
@@ -134,7 +140,8 @@ public class MainActivity extends Activity {
 
                 // NOUVEAU & DERNIER PB (inch) ici!! l'ajout ".putFile(uri) ne marche pas
 
-                filepath.putFile(uri)
+                filepath.putBytes(byteArray)
+                        //.putFile(uri)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
