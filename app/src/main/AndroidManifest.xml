@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".choix_photo_partager"
+            android:name=".photo_partager"
             android:label="choix photo"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".layout_informations_photo"
+            android:name=".informations_photo"
             android:label="informations photo"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
