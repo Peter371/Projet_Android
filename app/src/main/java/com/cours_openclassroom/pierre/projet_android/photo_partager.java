@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -34,6 +36,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -54,6 +58,7 @@ public class photo_partager extends Activity {
     private static Context context;
     private Button retour;
     private StorageReference mStorage;
+    private FirebaseDatabase database;
     private ProgressDialog mProgress;
 
 
@@ -63,6 +68,7 @@ public class photo_partager extends Activity {
         photo_partager.context = getApplicationContext();
         setContentView(R.layout.activity_photo_partager);
         mStorage = FirebaseStorage.getInstance().getReference();
+        database = FirebaseDatabase.getInstance();
         tvHasCamera = (TextView) findViewById(R.id.tvHasCamera);
         tvHasCameraApp = (TextView) findViewById(R.id.tvHasCameraApp);
         tvNomPic = (EditText) findViewById(R.id.tvNomPhoto);
@@ -117,7 +123,12 @@ public class photo_partager extends Activity {
                                     // Si réussite à l'accès storage firebase
                                     mProgress.dismiss();
                                     Toast.makeText(photo_partager.this, "Upload terminé :)", Toast.LENGTH_LONG).show();
-                                    //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                    @SuppressWarnings("VisibleForTests") Uri downloadUri = taskSnapshot.getDownloadUrl();
+                                    Log.e("Zaza", "incoming");
+                                    Log.e("Zoulou", downloadUri.toString());
+//                                    @SuppressWarnings("VisibleForTests") DatabaseReference myRef = database.getReference("tabDLphoto").child(taskSnapshot.getDownloadUrl().toString());
+//                                    Image img = new Image(trail.getUnique_id(), downloadUri.toString());
+//                                    myRef.setValue(img);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
