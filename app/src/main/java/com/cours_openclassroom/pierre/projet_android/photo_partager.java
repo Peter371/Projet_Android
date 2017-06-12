@@ -9,31 +9,21 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
-
-import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -42,23 +32,17 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.util.List;
 
-/**
- * Created by Pierre on 25/05/2017.
- */
 
 public class photo_partager extends Activity {
 
-    private Button btnTackPic, btnUploadPic;
-    private TextView tvHasCamera, tvHasCameraApp;
     private EditText tvNomPic;
     private ImageView ivThumbnailPhoto;
-    private Bitmap bitMap;
     private static int TAKE_PICTURE = 1;
     private static Context context;
-    private Button retour;
     private StorageReference mStorage;
-    private FirebaseDatabase database;
     private ProgressDialog mProgress;
 
 
@@ -68,12 +52,12 @@ public class photo_partager extends Activity {
         photo_partager.context = getApplicationContext();
         setContentView(R.layout.activity_photo_partager);
         mStorage = FirebaseStorage.getInstance().getReference();
-        database = FirebaseDatabase.getInstance();
-        tvHasCamera = (TextView) findViewById(R.id.tvHasCamera);
-        tvHasCameraApp = (TextView) findViewById(R.id.tvHasCameraApp);
+        final DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        TextView tvHasCamera = (TextView) findViewById(R.id.tvHasCamera);
+        TextView tvHasCameraApp = (TextView) findViewById(R.id.tvHasCameraApp);
         tvNomPic = (EditText) findViewById(R.id.tvNomPhoto);
-        btnTackPic = (Button) findViewById(R.id.btnTakePic);
-        btnUploadPic = (Button) findViewById(R.id.btnUpload);
+        Button btnTackPic = (Button) findViewById(R.id.btnTakePic);
+        Button btnUploadPic = (Button) findViewById(R.id.btnUpload);
         ivThumbnailPhoto = (ImageView) findViewById(R.id.ivThumbnailPhoto);
         mProgress = new ProgressDialog(this);
         // Does your device have a camera?
@@ -105,6 +89,7 @@ public class photo_partager extends Activity {
         btnUploadPic.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (ivThumbnailPhoto.getDrawable() == null || tvNomPic.getText().toString().matches("")) {
                     Toast.makeText(photo_partager.this, "Il manque la photo ou le nom de la photo :)", Toast.LENGTH_SHORT).show();
                 } else {
@@ -127,6 +112,8 @@ public class photo_partager extends Activity {
                                     Log.e("Zaza", "incoming");
                                     Log.e("Zoulou", downloadUri.toString());
 //                                    @SuppressWarnings("VisibleForTests") DatabaseReference myRef = database.getReference("tabDLphoto").child(taskSnapshot.getDownloadUrl().toString());
+                                    DatabaseReference newRef = database.child("linkDLphoto").push();
+                                    newRef.setValue(downloadUri.toString());
 //                                    Image img = new Image(trail.getUnique_id(), downloadUri.toString());
 //                                    myRef.setValue(img);
                                 }
@@ -144,7 +131,7 @@ public class photo_partager extends Activity {
             }
         });
 
-        retour = (Button) findViewById(R.id.retour);
+        Button retour = (Button) findViewById(R.id.retour);
         retour.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,14 +159,14 @@ public class photo_partager extends Activity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK && intent != null) {
-            bitMap = (Bitmap) intent.getExtras().get("data");
+            Bitmap bitMap = (Bitmap) intent.getExtras().get("data");
             ivThumbnailPhoto.setImageBitmap(bitMap);
         }
     }
