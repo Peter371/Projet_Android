@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -109,13 +108,12 @@ public class photo_partager extends Activity {
                                     mProgress.dismiss();
                                     Toast.makeText(photo_partager.this, "Upload terminé :)", Toast.LENGTH_LONG).show();
                                     @SuppressWarnings("VisibleForTests") Uri downloadUri = taskSnapshot.getDownloadUrl();
+                                    assert downloadUri != null;
+                                    photoInformation pi = new photoInformation(downloadUri.toString());
                                     Log.e("Zaza", "incoming");
                                     Log.e("Zoulou", downloadUri.toString());
-//                                    @SuppressWarnings("VisibleForTests") DatabaseReference myRef = database.getReference("tabDLphoto").child(taskSnapshot.getDownloadUrl().toString());
                                     DatabaseReference newRef = database.child("linkDLphoto").push();
-                                    newRef.setValue(downloadUri.toString());
-//                                    Image img = new Image(trail.getUnique_id(), downloadUri.toString());
-//                                    myRef.setValue(img);
+                                    newRef.setValue(pi);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
