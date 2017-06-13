@@ -5,25 +5,27 @@ package com.cours_openclassroom.pierre.projet_android;
  */
 
 public class Tweet {
-    private int color;
+    //private Bitmap img;
     private String pseudo;
     private String text;
+    private String downLoadURI;
 
-    public Tweet(int color, String pseudo, String text) {
-        this.color = color;
+    Tweet(String pseudo, String text, String downloadURI) {
+//        this.img = img;
         this.pseudo = pseudo;
         this.text = text;
+        this.downLoadURI = downloadURI;
     }
 
-    public int getColor() {
-        return color;
-    }
+//    Bitmap getimg() {
+//        return img;
+//    }
+//
+//    public void setimg(Bitmap img) {
+//        this.img = img;
+//    }
 
-    public void setColor(int color) {
-        this.color = color;
-    }
-
-    public String getPseudo() {
+    String getPseudo() {
         return pseudo;
     }
 
@@ -37,5 +39,9 @@ public class Tweet {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getDownLoadURI() {
+        return downLoadURI;
     }
 }

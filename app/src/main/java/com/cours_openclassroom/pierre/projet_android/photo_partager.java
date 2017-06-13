@@ -32,6 +32,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -96,10 +97,11 @@ public class photo_partager extends Activity {
                     mProgress.show();
 
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    Bitmap btmp = ((BitmapDrawable) ivThumbnailPhoto.getDrawable()).getBitmap();
+                    final Bitmap btmp = ((BitmapDrawable) ivThumbnailPhoto.getDrawable()).getBitmap();
                     btmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] byteArray = stream.toByteArray();
-                    StorageReference filepath = mStorage.child("Photos").child(tvNomPic.getText().toString());
+                    final byte[] byteArray = stream.toByteArray();
+                    final String nomPic = tvNomPic.getText().toString();
+                    StorageReference filepath = mStorage.child("Photos").child(nomPic.toLowerCase().replace(" ", "_"));
                     filepath.putBytes(byteArray)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -109,7 +111,10 @@ public class photo_partager extends Activity {
                                     Toast.makeText(photo_partager.this, "Upload terminé :)", Toast.LENGTH_LONG).show();
                                     @SuppressWarnings("VisibleForTests") Uri downloadUri = taskSnapshot.getDownloadUrl();
                                     assert downloadUri != null;
-                                    photoInformation pi = new photoInformation(downloadUri.toString());
+                                    Calendar calendar = Calendar.getInstance();
+                                    String dateString = String.format("%1$tA %1$tb %1$td %1$tY at %1$tI:%1$tM %1$Tp", calendar);
+                                    String poids = String.valueOf(btmp.getByteCount()/1024);
+                                    photoInformation pi = new photoInformation(downloadUri.toString(), nomPic, dateString, poids);
                                     Log.e("Zaza", "incoming");
                                     Log.e("Zoulou", downloadUri.toString());
                                     DatabaseReference newRef = database.child("linkDLphoto").push();

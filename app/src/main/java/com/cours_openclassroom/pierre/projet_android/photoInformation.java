@@ -8,19 +8,34 @@ import android.graphics.Bitmap;
 
 public class photoInformation {
     private String downloadURI;
+    private String nomPhoto;
+    private String date;
+    private String poids;
 
-    photoInformation(String downloadURI){
+    photoInformation(String downloadURI, String nomPhoto, String date, String poids) {
         this.downloadURI = downloadURI;
+        this.nomPhoto = nomPhoto;
+        this.date = date;
+        this.poids = poids;
     }
 
-    public photoInformation(){
+    public photoInformation() {
 
     }
 
-    public String getDownloadURI(){
+    public String getDownloadURI() {
         return downloadURI;
     }
-    public void setDownloadURI(String downloadURI){
-        this.downloadURI = downloadURI;
+
+    public String getNomPhoto() {
+        return nomPhoto;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getpoids() {
+        return poids;
     }
 }

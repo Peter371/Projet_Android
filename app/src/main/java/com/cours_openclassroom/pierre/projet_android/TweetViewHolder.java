@@ -7,8 +7,8 @@ import android.widget.TextView;
  * Created by Thomas on 12/06/2017.
  */
 
-public class TweetViewHolder {
-    public TextView pseudo;
+class TweetViewHolder {
+    TextView pseudo;
     public TextView text;
-    public ImageView avatar;
+    ImageView avatar;
 }
